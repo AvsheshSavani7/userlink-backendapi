@@ -8,13 +8,21 @@ const chatThreadSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: true
+    required: false
+  },
+  name: {
+    type: String,
+    required: false
   },
   userId: {
     type: String,
     required: true
   },
   assistantId: {
+    type: String,
+    required: false
+  },
+  openaiThreadId: {
     type: String,
     required: false
   },

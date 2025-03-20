@@ -6,21 +6,37 @@ const messageSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  text: {
+  content: {
     type: String,
     required: true
   },
-  userId: {
+  text: {
+    type: String
+  },
+  threadId: {
     type: String,
     required: true
+  },
+  openaiThreadId: {
+    type: String
   },
   chatThreadId: {
-    type: String,
-    required: true
+    type: String
   },
-  timestamp: {
+  userId: {
+    type: String
+  },
+  role: {
+    type: String,
+    enum: ["user", "assistant", "system"],
+    default: "user"
+  },
+  createdAt: {
     type: Date,
     default: Date.now
+  },
+  timestamp: {
+    type: Date
   }
 });
 

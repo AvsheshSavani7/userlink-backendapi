@@ -17,4 +17,7 @@ router.delete("/:id", fileController.deleteFile);
 // Get file content
 router.get("/:id/content", fileController.getFileContent);
 
+// Download file
+router.get("/:id/download", fileController.downloadFile);
+
 module.exports = router;
