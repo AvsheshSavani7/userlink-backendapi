@@ -54,7 +54,7 @@ const initializeDb = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true
       });
-      await syncIndexes();
+      // await syncIndexes();
       await ensureCollectionsExist();
 
       console.log("Connected to MongoDB");
