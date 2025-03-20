@@ -30,24 +30,14 @@ const server = http.createServer(app);
 let dbConnection;
 let dbType;
 
-// Initialize database
-const startServer = async () => {
-  try {
-    const dbInfo = await initializeDb();
-    dbType = dbInfo.type;
-    dbConnection = dbInfo.connection;
+initializeDb();
 
-    // Make db accessible to routes
-    app.use((req, res, next) => {
-      req.db = dbConnection;
-      req.dbType = dbType;
-      next();
-    });
-  } catch (error) {
-    console.error("Failed to start server:", error);
-    process.exit(1);
-  }
-};
+app.use((req, res, next) => {
+  req.db = {};
+  req.dbType = "mongodb";
+  next();
+});
+// Initialize database
 
 // Middleware
 app.use(cors());
@@ -72,6 +62,4 @@ server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-// Start the server
-startServer();
 module.exports = app;
