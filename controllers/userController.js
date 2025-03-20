@@ -105,6 +105,7 @@ const createUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   const db = req.db;
   const dbType = req.dbType;
+  console.log("dbType", dbType);
 
   try {
     if (dbType === "mongodb") {
