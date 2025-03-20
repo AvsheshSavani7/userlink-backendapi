@@ -30,7 +30,7 @@ const server = http.createServer(app);
 let dbConnection;
 let dbType;
 
-await initializeDb();
+initializeDb();
 
 app.use((req, res, next) => {
   req.db = {};

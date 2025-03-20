@@ -52,7 +52,8 @@ const initializeDb = async () => {
       // Connect to MongoDB in any environment
       await mongoose.connect(process.env.MONGODB_URI, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 10000
       });
       // await syncIndexes();
       // await ensureCollectionsExist();
