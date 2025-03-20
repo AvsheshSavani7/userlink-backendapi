@@ -55,7 +55,7 @@ const initializeDb = async () => {
         useUnifiedTopology: true
       });
       // await syncIndexes();
-      await ensureCollectionsExist();
+      // await ensureCollectionsExist();
 
       console.log("Connected to MongoDB");
       return { type: "mongodb", connection: mongoose.connection };
