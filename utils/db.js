@@ -67,7 +67,7 @@ const initializeDb = async () => {
       const adapter = new Memory();
       db = low(adapter);
       setupLowDb(db);
-      return { type: "lowdb", connection: db };
+      return { type: "mongodb", connection: db };
     }
   } else {
     console.log("No MONGODB_URI provided. Using local database");
