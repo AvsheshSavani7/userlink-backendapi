@@ -1,5 +1,9 @@
 const { v4: uuidv4 } = require("uuid");
-
+const openaiApi = require("../utils/openai");
+// const OpenAI = require("openai");
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY // Use environment variable for API key
+// });
 // Get all messages with optional filters
 const getAllMessages = async (req, res) => {
   const { threadId, userId } = req.query;
@@ -22,9 +26,11 @@ const getAllMessages = async (req, res) => {
       if (threadId) {
         // Simple case: filter by threadId
         console.log(`Searching for messages with threadId: ${threadId}`);
-        const messages = await Message.find({ threadId }).sort({
-          createdAt: 1
-        });
+
+        // const messages = await Message.find({ threadId }).sort({
+        //   createdAt: 1
+        // });
+        const messages = await openaiApi.getThreadMessagess(threadId);
         console.log(
           `Found ${messages.length} messages with threadId=${threadId}`
         );
@@ -74,10 +80,10 @@ const getAllMessages = async (req, res) => {
       }
 
       // If no filters, get all messages
-      console.log("No filters provided, returning all messages");
-      const messages = await Message.find().sort({ createdAt: 1 });
-      console.log(`Found ${messages.length} total messages`);
-      return res.json(messages);
+      // console.log("No filters provided, returning all messages");
+      // const messages = await Message.find().sort({ createdAt: 1 });
+      // console.log(`Found ${messages.length} total messages`);
+      // return res.json(messages);
     } else {
       // For lowdb, use the existing logic
       console.log("Using LowDB for message retrieval");
@@ -155,6 +161,7 @@ const getThreadMessages = async (req, res) => {
       const Message = require("../models/Message");
 
       const messages = await Message.find({ threadId }).sort({ createdAt: 1 });
+      // const messages = await openaiApi.getThreadMessagess(threadId);
       return res.json(messages);
     } else {
       // For lowdb, use the existing logic

@@ -132,6 +132,11 @@ const getAllAssistants = async (req, res) => {
         if (user && user.assistantId) {
           // Find the assistant by ID
           const assistant = await Assistant.findOne({ id: user.assistantId });
+
+          // const messages = await openai.beta.threads.messages.list(
+          //   assistant.threadId
+          // );
+          // console.log("message111", messages);
           return res.json(assistant ? [assistant] : []);
         } else {
           // If no assistantId is found on the user, return an empty array
@@ -187,6 +192,7 @@ const getAssistantById = async (req, res) => {
       if (!assistant) {
         return res.status(404).json({ message: "Assistant not found" });
       }
+      // Get messages from thread
 
       res.json(assistant);
     } else {

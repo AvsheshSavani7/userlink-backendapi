@@ -181,6 +181,22 @@ const openaiApi = {
       );
       throw error;
     }
+  },
+  async getThreadMessagess(assistantId) {
+    try {
+      const response = await axios.get(
+        `https://api.openai.com/v1/threads/${assistantId}/messages`,
+        { headers: this.getHeaders() }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error(
+        "Error getting assistant:",
+        error.response?.data || error.message
+      );
+      throw error;
+    }
   }
 };
 
